@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Agenda do Workshop BAI 2025 — palestras, workshops e painéis sobre inovação e tecnologia." />
+  <title>Agenda do Workshop</title>
+  <!-- Fonte moderna e legível -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+  :root{
+  --bg: transparent;
+    --surface: #ffffff;
+    --primary: #fc6209; /* laranja */
+    --accent: #06b6b6;  /* ciano mais suave */
+    --muted: #667085;
+    --text: #0f172a;
+    --border: #e6e9ee;
+    --radius: 10px;
+    --container-width: 1100px;
+  }
+
+  /* ===== Global ===== */
+  html,body{height:100%;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Inter, Poppins, Arial, sans-serif;-webkit-font-smoothing:antialiased;}
+  .container{max-width:var(--container-width);margin:0 auto;padding:40px 20px 40px;}
+
+  /* Skip link for keyboard users */
+  .skip-link{position:fixed;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+  .skip-link:focus{left:10px;top:10px;width:auto;height:auto;padding:8px 12px;background:#000;color:#fff;border-radius:6px;z-index:9999}
+
+  /* ===== Header ===== */
+  /* Header NÃO fixo por padrão. Vai receber .is-sticky quando o usuário rolar a página. */
+  /* Por padrão é transparente para não mostrar a barra de background antes do scroll.
+    Usamos position:absolute para que o header sobreponha o hero (sem empurrá-lo),
+    e quando o usuário rolar o header troca para fixed (.is-sticky) via JS. */
+  header{position:absolute;top:0;left:0;right:0;height:64px;background:transparent;box-shadow:none;display:flex;align-items:center;z-index:1000}
+  /* Estado quando fixo (aplicado via JS) */
+  header.is-sticky{position:fixed;left:0;right:0;top:0;height:64px;background:linear-gradient(90deg,#002b7f 0%,#b33b2b 100%);box-shadow:0 6px 18px rgba(15,23,42,0.08)}
+  .navbar{display:flex;align-items:center;justify-content:space-between;max-width:var(--container-width);width:100%;margin:0 auto;padding:0 20px;color:#fff;position:relative}
+  /* nav alinhada à direita, logo permanece à esquerda */
+  /* menu removido - navegação não necessária */
+  .header-actions{display:flex;align-items:center;gap:12px}
+  .play-cta{background:#2ea6ff;color:#04203a;padding:8px 14px;border-radius:10px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+  .play-cta .dot{width:10px;height:10px;background:#fff;border-radius:50%}
+  .logo{display:flex;align-items:center;gap:12px}
+  .logo img{height:40px;width:auto;display:block}
+  .logo span{font-weight:700;font-size:18px;letter-spacing:0.2px}
+
+  /* navegação removida - links e botão não são necessários */
+
+  /* ===== Carousel / Hero ===== */
+  .hero-carousel{position:relative;min-height:640px;overflow:hidden}
+  .carousel-slides{height:100%;display:flex;transition:transform .8s ease}
+  .slide{min-width:100%;height:640px;background-size:cover;background-position:center right;position:relative;display:flex;align-items:center;background-repeat:no-repeat}
+  /* gradient overlay will be added as the first background layer per-slide (inline) */
+  .slide::after{display:none}
+  .slide .hero-content{position:relative;z-index:2;padding:120px 20px;max-width:900px;color:#fff}
+  .slide h2{font-family:Poppins,Inter,Arial,sans-serif;font-size:88px;line-height:0.95;margin:0 0 18px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+  .slide p.lead{font-size:20px;margin:0 0 18px;font-weight:600;color:rgba(255,255,255,0.95)}
+  .slide .meta{font-size:16px;color:rgba(255,255,255,0.9)}
+
+  .carousel-prev,.carousel-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:0;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer}
+  .carousel-prev{left:18px}
+  .carousel-next{right:18px}
+  .carousel-indicators{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:8px}
+  .carousel-indicators button{width:12px;height:12px;border-radius:50%;border:0;background:rgba(255,255,255,0.36);cursor:pointer}
+  .carousel-indicators button.active{background:var(--accent);box-shadow:0 6px 18px rgba(6,182,182,0.12)}
+
+  /* UX rules block */
+  .ux-rules{margin:40px auto 80px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;max-width:var(--container-width);box-shadow:0 8px 30px rgba(2,6,23,0.04)}
+  .ux-rules h3{margin:0 0 10px;font-size:20px}
+  .ux-rules ul{margin:0;padding-left:18px;color:var(--muted)}
+  .ux-rules li{margin-bottom:8px}
+
+  /* ===== Titles ===== */
+  h1{text-align:center;font-size:36px;margin:8px 0 6px}
+  .subtitle{text-align:center;color:var(--muted);font-size:15px;margin-bottom:30px}
+
+  /* ===== Days (tabs) ===== */
+  .days{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+  .day-input{display:none}
+  .day-label{cursor:pointer;padding:10px 16px;border-radius:999px;background:transparent;border:1px solid transparent;display:flex;flex-direction:column;align-items:center;min-width:120px;transition:all .18s;box-shadow:none}
+  .day-label .title{font-weight:700;font-size:16px;color:var(--text)}
+  .day-label .date{font-size:13px;color:var(--muted)}
+
+  /* visual active state using the checked input (inputs are before .days) */
+ #day1:checked ~ .days label[for="day1"],
+#day2:checked ~ .days label[for="day2"],
+#day3:checked ~ .days label[for="day3"],
+#day4:checked ~ .days label[for="day4"],
+#day5:checked ~ .days label[for="day5"],
+#day6:checked ~ .days label[for="day6"],
+#day7:checked ~ .days label[for="day7"],
+#day8:checked ~ .days label[for="day8"],
+#day9:checked ~ .days label[for="day9"],
+#day10:checked ~ .days label[for="day10"],
+#day11:checked ~ .days label[for="day11"] {
+  background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+  border: 1px solid rgba(6,182,182,0.12);
+  box-shadow: 0 6px 18px rgba(6,182,182,0.06);
+  transform: translateY(-2px);
+}
+
+#day1:checked ~ .days label[for="day1"] .title,
+#day2:checked ~ .days label[for="day2"] .title,
+#day3:checked ~ .days label[for="day3"] .title,
+#day4:checked ~ .days label[for="day4"] .title,
+#day5:checked ~ .days label[for="day5"] .title,
+#day6:checked ~ .days label[for="day6"] .title,
+#day7:checked ~ .days label[for="day7"] .title,
+#day8:checked ~ .days label[for="day8"] .title,
+#day9:checked ~ .days label[for="day9"] .title,
+#day10:checked ~ .days label[for="day10"] .title,
+#day11:checked ~ .days label[for="day11"] .title {
+  color: var(--accent);
+}
+
+  .chev{color:#cbd5e1;align-self:center;font-size:18px}
+
+  /* dias scroll (melhora para muitos dias) */
+  .days{overflow-x:auto;padding:8px 6px 12px;white-space:nowrap;gap:10px}
+  .days::-webkit-scrollbar{height:8px}
+  .days::-webkit-scrollbar-thumb{background:rgba(15,23,42,0.08);border-radius:8px}
+  .day-label{display:inline-flex;flex-direction:column;align-items:center;min-width:110px}
+  .day-label .title{font-size:15px}
+
+  /* ===== Schedule ===== */
+  .schedule{background:linear-gradient(#fbfdff,#f7fbfb);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  .schedule-header{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.6fr;background:var(--surface);padding:12px 18px;border-bottom:1px solid var(--border);font-weight:700;color:var(--muted);text-transform:uppercase;font-size:13px}
+
+  .schedule-content{display:none;opacity:0;transition:opacity .35s ease}
+  .session{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.6fr;padding:18px;border-bottom:1px solid var(--border);gap:10px;align-items:start}
+  .session{background:transparent}
+  .session-card{background:var(--surface);border-radius:8px;padding:14px;box-shadow:0 6px 18px rgba(2,6,23,0.04)}
+  .session .tema{font-weight:600;color:var(--text);margin-bottom:6px}
+  .session .sala{color:var(--muted);font-weight:600}
+  .session .hora{font-size:13px;color:var(--muted)}
+  .session .oradores ul{margin:0;padding-left:18px}
+  .session .oradores li{margin-bottom:6px}
+
+  /* show active day */
+  #day1:checked ~ .schedule [data-day="1"],
+    #day2:checked ~ .schedule [data-day="2"],
+    #day3:checked ~ .schedule [data-day="3"],
+    #day4:checked ~ .schedule [data-day="4"],
+    #day5:checked ~ .schedule [data-day="5"],
+    #day6:checked ~ .schedule [data-day="6"],
+    #day7:checked ~ .schedule [data-day="7"],
+    #day8:checked ~ .schedule [data-day="8"],
+    #day9:checked ~ .schedule [data-day="9"],
+    #day10:checked ~ .schedule [data-day="10"],
+    #day11:checked ~ .schedule [data-day="11"]{
+      display:block;opacity:1;
+    }
+
+  /* focus states for accessibility */
+  a:focus,button:focus,label:focus{outline:none}
+  .day-label:focus-visible, .nav-links a:focus-visible{outline:3px solid rgba(6,182,182,0.18);border-radius:10px}
+
+  /* responsive */
+  @media (max-width:900px){
+    .container{padding:90px 16px 30px}
+    .schedule-header, .session{grid-template-columns:1fr}
+    .session div{border-right:none;border-bottom:0;padding:8px 6px}
+  nav.nav-links{display:none}
+  .menu-toggle{display:none}
+    .day-label{min-width:96px;padding:8px 12px}
+    .slide{height:420px}
+    .hero-carousel{min-height:420px}
+    .slide h2{font-size:40px}
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Pular para conteúdo</a>
+
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="BAI.png" alt="BAI">
+      </div>
+      <!-- menu removido conforme solicitado -->
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Carousel / Hero -->
+    <section class="hero-carousel" aria-label="Destaques">
+      <div class="carousel-slides" data-current="0">
+  <div class="slide" style="background-image: linear-gradient(90deg, rgba(0,43,127,0.65) 0%, rgba(179,59,43,0.45) 100%), url('banner.jpg')" data-title="BAI 2025" data-lead="50 anos - A comunicar, a modernizar e a desenvolver Angola" data-meta="12 - 14 Junho 2025 | Centro de Convenções Talatona, Luanda">
+          <div class="hero-content">
+            <h2>BAI 2025</h2>
+            <p class="lead">50 anos - A comunicar, a modernizar e a desenvolver Angola</p>
+            <div class="meta">12 - 14 Junho 2025 | Centro de Convenções Talatona, Luanda</div>
+          </div>
+        </div>
+  <div class="slide" style="background-image: linear-gradient(90deg, rgba(0,43,127,0.55) 0%, rgba(179,59,43,0.35) 100%), url('banner2.jpg')" data-title="Programa Tecnológico" data-lead="Workshops e painéis com líderes do setor" data-meta="13 Junho 2025 | Auditório Principal">
+          <div class="hero-content">
+            <h2>Programa Tecnológico</h2>
+            <p class="lead">Workshops e painéis com líderes do setor</p>
+            <div class="meta">13 Junho 2025 | Auditório Principal</div>
+          </div>
+        </div>
+  <div class="slide" style="background-image: linear-gradient(90deg, rgba(0,43,127,0.6) 0%, rgba(179,59,43,0.4) 100%), url('banner.webp')" data-title="Inovação & Startups" data-lead="Mostra de startups e networking" data-meta="14 Junho 2025 | Expo Hall">
+          <div class="hero-content">
+            <h2>Inovação & Startups</h2>
+            <p class="lead">Mostra de startups e networking</p>
+            <div class="meta">14 Junho 2025 | Expo Hall</div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-prev" aria-label="Anterior">‹</button>
+      <button class="carousel-next" aria-label="Próximo">›</button>
+      <div class="carousel-indicators" role="tablist">
+        <button aria-label="Slide 1" class="active"></button>
+        <button aria-label="Slide 2"></button>
+        <button aria-label="Slide 3"></button>
+      </div>
+    </section>
+
+    <div class="container">
+      <h1>Agenda</h1>
+      <p class="subtitle">A agenda inclui palestras, workshops e atividades voltadas para inovação e tecnologia.</p>
+
+      <input type="radio" id="day1" name="day" class="day-input" checked>
+      <input type="radio" id="day2" name="day" class="day-input">
+      <input type="radio" id="day3" name="day" class="day-input">
+      <input type="radio" id="day4" name="day" class="day-input">
+      <input type="radio" id="day5" name="day" class="day-input">
+      <input type="radio" id="day6" name="day" class="day-input">
+      <input type="radio" id="day7" name="day" class="day-input">
+      <input type="radio" id="day8" name="day" class="day-input">
+      <input type="radio" id="day9" name="day" class="day-input">
+      <input type="radio" id="day10" name="day" class="day-input">
+      <input type="radio" id="day11" name="day" class="day-input">
+
+      <!-- DIAS (01 - 11) -->
+      <div class="days" role="tablist" aria-label="Selecionar dia">
+        <label for="day1" class="day-label" tabindex="0"><span class="title">Dia 01</span><span class="date">12-06-2025</span></label>
+        <label for="day2" class="day-label" tabindex="0"><span class="title">Dia 02</span><span class="date">13-06-2025</span></label>
+        <label for="day3" class="day-label" tabindex="0"><span class="title">Dia 03</span><span class="date">14-06-2025</span></label>
+        <label for="day4" class="day-label" tabindex="0"><span class="title">Dia 04</span><span class="date">15-06-2025</span></label>
+        <label for="day5" class="day-label" tabindex="0"><span class="title">Dia 05</span><span class="date">16-06-2025</span></label>
+        <label for="day6" class="day-label" tabindex="0"><span class="title">Dia 06</span><span class="date">17-06-2025</span></label>
+        <label for="day7" class="day-label" tabindex="0"><span class="title">Dia 07</span><span class="date">18-06-2025</span></label>
+        <label for="day8" class="day-label" tabindex="0"><span class="title">Dia 08</span><span class="date">19-06-2025</span></label>
+        <label for="day9" class="day-label" tabindex="0"><span class="title">Dia 09</span><span class="date">20-06-2025</span></label>
+        <label for="day10" class="day-label" tabindex="0"><span class="title">Dia 10</span><span class="date">21-06-2025</span></label>
+        <label for="day11" class="day-label" tabindex="0"><span class="title">Dia 11</span><span class="date">22-06-2025</span></label>
+      </div>
+
+      <!-- PROGRAMA / SCHEDULE -->
+      <div class="schedule" role="region" aria-label="Programação do evento">
+        <div class="schedule-header">
+          <div>Tema</div>
+          <div>Sala/Horário</div>
+          <div>Moderador</div>
+          <div>Oradores</div>
+        </div>
+
+        <!-- DIA 1 -->
+        <div class="schedule-content" data-day="1">
+          <div class="session">
+            <div class="session-card tema">Abertura Oficial e Boas-Vindas</div>
+            <div class="session-card"><div class="sala">Auditório Principal</div><div class="hora">08:30 - 09:00</div></div>
+            <div class="session-card moderador">Comissão Organizadora</div>
+            <div class="session-card oradores">
+              <ul>
+                <li>Presidente da ANID</li>
+                <li>Representante do Ministério da Tecnologia</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-card tema">Keynote: O Futuro Digital de Angola</div>
+            <div class="session-card"><div class="sala">Auditório Principal</div><div class="hora">09:00 - 10:00</div></div>
+            <div class="session-card moderador">Dr. António Manuel</div>
+            <div class="session-card oradores">
+              <ul>
+                <li>Keynote Speaker: Prof.ª Isabel Coelho</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-card tema">Coffee Break e Networking</div>
+            <div class="session-card"><div class="sala">Foyer</div><div class="hora">10:00 - 10:30</div></div>
+            <div class="session-card moderador">—</div>
+            <div class="session-card oradores">—</div>
+          </div>
+
+          <div class="session">
+            <div class="session-card tema">Painel: Infraestrutura e Conectividade</div>
+            <div class="session-card"><div class="sala">Sala Principal</div><div class="hora">10:30 - 12:00</div></div>
+            <div class="session-card moderador">Eng. Rui Lopes</div>
+            <div class="session-card oradores">
+              <ul>
+                <li>Operador A</li>
+                <li>Operador B</li>
+                <li>Especialista em Redes</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-card tema">Almoço (intervalo)</div>
+            <div class="session-card"><div class="sala">Restaurante</div><div class="hora">12:00 - 13:30</div></div>
+            <div class="session-card moderador">—</div>
+            <div class="session-card oradores">—</div>
+          </div>
+
+          <div class="session">
+            <div class="session-card tema">Workshops Paralelos (A & B)</div>
+            <div class="session-card"><div class="sala">Sala A / Sala B</div><div class="hora">13:30 - 15:00</div></div>
+            <div class="session-card moderador">Vários</div>
+            <div class="session-card oradores">
+              <ul>
+                <li>Workshop A: DevOps e Cloud — Eng. Márcio Abreu</li>
+                <li>Workshop B: IA Aplicada — Eng. Teresa Matos</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-card tema">Mesa Redonda: Startups e Inovação</div>
+            <div class="session-card"><div class="sala">Sala Benguela</div><div class="hora">15:30 - 16:30</div></div>
+            <div class="session-card moderador">Sara João</div>
+            <div class="session-card oradores">
+              <ul>
+                <li>Fundador BukaAPP</li>
+                <li>Fundador InovHub</li>
+                <li>Representante do Ecossistema</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-card tema">Painel: O Papel da Mulher na Transformação Digital</div>
+            <div class="session-card"><div class="sala">Sala Namibe</div><div class="hora">16:45 - 18:00</div></div>
+            <div class="session-card moderador">Ana Domingos</div>
+            <div class="session-card oradores">
+              <ul>
+                <li>Women in Tech Angola</li>
+                <li>Empreendedoras Digitais Africanas</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-card tema">Encerramento e Agradecimentos</div>
+            <div class="session-card"><div class="sala">Auditório Principal</div><div class="hora">18:00 - 18:15</div></div>
+            <div class="session-card moderador">Comissão Organizadora</div>
+            <div class="session-card oradores">—</div>
+          </div>
+        </div>
+
+        <!-- DIA 2 -->
+        <div class="schedule-content" data-day="2">
+          <div class="session">
+            <div class="session-card tema">Plenária: A Transformação Digital em África</div>
+            <div class="session-card"><div class="sala">Sala Principal</div><div class="hora">10:00 - 12:00</div></div>
+            <div class="session-card moderador">Dr. António Manuel</div>
+            <div class="session-card oradores">
+              <ul><li>Orador 1</li><li>Orador 2</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIA 3 -->
+        <div class="schedule-content" data-day="3">
+          <div class="session">
+            <div class="session-card tema">Workshop: Inteligência Artificial e Startups</div>
+            <div class="session-card"><div class="sala">Sala 3</div><div class="hora">09:00 - 11:00</div></div>
+            <div class="session-card moderador">Eng. João Silva</div>
+            <div class="session-card oradores">
+              <ul><li>Maria Fernandes</li><li>Pedro Oliveira</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIA 4 - 11 (placeholders) -->
+        <div class="schedule-content" data-day="4">
+          <div class="session">
+            <div class="session-card tema">Sessão Dia 04 - Em breve</div>
+            <div class="session-card"><div class="sala">Sala A</div><div class="hora">09:00 - 10:30</div></div>
+            <div class="session-card moderador">TBD</div>
+            <div class="session-card oradores">—</div>
+          </div>
+        </div>
+
+        <div class="schedule-content" data-day="5">
+          <div class="session">
+            <div class="session-card tema">Sessão Dia 05 - Em breve</div>
+            <div class="session-card"><div class="sala">Sala B</div><div class="hora">10:45 - 12:00</div></div>
+            <div class="session-card moderador">TBD</div>
+            <div class="session-card oradores">—</div>
+          </div>
+        </div>
+
+        <div class="schedule-content" data-day="6">
+          <div class="session">
+            <div class="session-card tema">Sessão Dia 06 - Em breve</div>
+            <div class="session-card"><div class="sala">Sala C</div><div class="hora">09:00 - 11:00</div></div>
+            <div class="session-card moderador">TBD</div>
+            <div class="session-card oradores">—</div>
+          </div>
+        </div>
+
+        <div class="schedule-content" data-day="7">
+          <div class="session">
+            <div class="session-card tema">Sessão Dia 07 - Em breve</div>
+            <div class="session-card"><div class="sala">Sala D</div><div class="hora">13:00 - 15:00</div></div>
+            <div class="session-card moderador">TBD</div>
+            <div class="session-card oradores">—</div>
+          </div>
+        </div>
+
+        <div class="schedule-content" data-day="8">
+          <div class="session">
+            <div class="session-card tema">Sessão Dia 08 - Em breve</div>
+            <div class="session-card"><div class="sala">Sala E</div><div class="hora">09:00 - 12:00</div></div>
+            <div class="session-card moderador">TBD</div>
+            <div class="session-card oradores">—</div>
+          </div>
+        </div>
+
+        <div class="schedule-content" data-day="9">
+          <div class="session">
+            <div class="session-card tema">Sessão Dia 09 - Em breve</div>
+            <div class="session-card"><div class="sala">Sala F</div><div class="hora">14:00 - 16:00</div></div>
+            <div class="session-card moderador">TBD</div>
+            <div class="session-card oradores">—</div>
+          </div>
+        </div>
+
+        <div class="schedule-content" data-day="10">
+          <div class="session">
+            <div class="session-card tema">Sessão Dia 10 - Em breve</div>
+            <div class="session-card"><div class="sala">Sala G</div><div class="hora">09:00 - 11:30</div></div>
+            <div class="session-card moderador">TBD</div>
+            <div class="session-card oradores">—</div>
+          </div>
+        </div>
+
+        <div class="schedule-content" data-day="11">
+          <div class="session">
+            <div class="session-card tema">Sessão Dia 11 - Em breve</div>
+            <div class="session-card"><div class="sala">Sala H</div><div class="hora">10:00 - 12:00</div></div>
+            <div class="session-card moderador">TBD</div>
+            <div class="session-card oradores">—</div>
+          </div>
+        </div>
+
+      </div> <!-- .schedule -->
+    </div> <!-- .container -->
+  </main>
+
+  <script>
+    // Handler mínimo: permitir ativar os labels de dia via teclado (Enter / Space)
+    (function(){
+      document.querySelectorAll('.day-label').forEach(function(lbl){
+        lbl.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); lbl.click(); }});
+      });
+    })();
+    
+    // Carousel simples: autoplay, indicadores, botões e teclado
+    (function(){
+      var carousel = document.querySelector('.hero-carousel');
+      if(!carousel) return;
+      var slidesWrap = carousel.querySelector('.carousel-slides');
+      var slides = carousel.querySelectorAll('.slide');
+      var prev = carousel.querySelector('.carousel-prev');
+      var next = carousel.querySelector('.carousel-next');
+      var indicators = carousel.querySelectorAll('.carousel-indicators button');
+      var current = 0;
+      var total = slides.length;
+  // intervalo de autoplay em ms (ajustado para ser mais confortável)
+  var interval = 8000;
+      var timer = null;
+
+      function goTo(i){
+        current = (i + total) % total;
+        slidesWrap.style.transform = 'translateX(' + (-current*100) + '%)';
+        indicators.forEach(function(btn, idx){ btn.classList.toggle('active', idx===current); });
+      }
+
+      function nextSlide(){ goTo(current+1); }
+      function prevSlide(){ goTo(current-1); }
+
+      next && next.addEventListener('click', function(){ nextSlide(); resetTimer(); });
+      prev && prev.addEventListener('click', function(){ prevSlide(); resetTimer(); });
+      indicators.forEach(function(btn, idx){ btn.addEventListener('click', function(){ goTo(idx); resetTimer(); }); });
+
+      function startTimer(){ timer = setInterval(nextSlide, interval); }
+      function stopTimer(){ if(timer){ clearInterval(timer); timer = null; } }
+      function resetTimer(){ stopTimer(); startTimer(); }
+
+      carousel.addEventListener('mouseenter', stopTimer);
+      carousel.addEventListener('focusin', stopTimer);
+      carousel.addEventListener('mouseleave', startTimer);
+      carousel.addEventListener('focusout', startTimer);
+
+      document.addEventListener('keydown', function(e){ if(e.key === 'ArrowLeft') prevSlide(); if(e.key === 'ArrowRight') nextSlide(); });
+
+      // iniciar
+      goTo(0);
+      startTimer();
+    })();
+
+    // Tornar header 'sticky' ao rolar além do hero
+    (function(){
+      var header = document.querySelector('header');
+      var hero = document.querySelector('.hero-carousel');
+      var container = document.querySelector('.container');
+      if(!header || !hero) return;
+
+      var threshold = hero.getBoundingClientRect().height - header.offsetHeight;
+      function onScroll(){
+        var scrolled = window.scrollY || window.pageYOffset;
+        if(scrolled > threshold){
+          if(!header.classList.contains('is-sticky')){
+            header.classList.add('is-sticky');
+            // prevenir salto: adicionar padding-top equivalente ao header na main container
+            document.documentElement.style.setProperty('--header-offset', header.offsetHeight + 'px');
+            document.querySelector('main').style.paddingTop = header.offsetHeight + 'px';
+          }
+        } else {
+          if(header.classList.contains('is-sticky')){
+            header.classList.remove('is-sticky');
+            document.querySelector('main').style.paddingTop = '';
+          }
+        }
+      }
+
+      // run on load and scroll
+      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('resize', function(){ threshold = hero.getBoundingClientRect().height - header.offsetHeight; onScroll(); });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
